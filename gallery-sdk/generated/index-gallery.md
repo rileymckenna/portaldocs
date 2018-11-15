@@ -697,7 +697,7 @@ Multiple hide keys can be used via a comma separated list: ?microsoft_azure_mark
 
 ```   
  <Reference Include="Microsoft.Azure.Gallery.Common">
-      <HintPath$(PkgMicrosoft_Azure_Gallery_Common)\lib\net45\Microsoft.Azure.Gallery.Common.dll</HintPath>
+      <HintPath>$(PkgMicrosoft_Azure_Gallery_Common)\lib\net45\Microsoft.Azure.Gallery.Common.dll</HintPath>
   </Reference> 
   ...
   <Import Project="$(PkgMicrosoft_Azure_Gallery_Common)\build\Microsoft.Azure.Gallery.AzureGalleryUtility.targets"            Condition="Exists('$(PkgMicrosoft_Azure_Gallery_Common)\build\Microsoft.Azure.Gallery.AzureGalleryUtility.targets')" />

@@ -3,11 +3,11 @@
 ## Master details browse scenario
 
 The code for this example comes from the 'master detail browse' sample in SamplesExtension. The code lives in:
-`\Client\MasterDetail\MasterDetailArea.ts`
-`\Client\MasterDetail\MasterDetailBrowse\MasterDetailBrowse.pdl`
-`\Client\MasterDetail\MasterDetailBrowse\MasterDetailBrowseData.ts`
-`\Client\MasterDetail\MasterDetailBrowse\ViewModels\DetailViewModels.ts`
-`\Client\MasterDetail\MasterDetailBrowse\ViewModels\MasterViewModels.ts`
+`\Client\V1\MasterDetail\MasterDetailArea.ts`
+`\Client\V1\MasterDetail\MasterDetailBrowse\MasterDetailBrowse.pdl`
+`\Client\V1\MasterDetail\MasterDetailBrowse\MasterDetailBrowseData.ts`
+`\Client\V1\MasterDetail\MasterDetailBrowse\ViewModels\DetailViewModels.ts`
+`\Client\V1\MasterDetail\MasterDetailBrowse\ViewModels\MasterViewModels.ts`
 
 The scenario modeled by this sample is one in which we want to retreive information from the server (a list of websites) and
 visualize this data across multiple blades. We'll cache the data from the server using a QueryCache and then use that QueryCache

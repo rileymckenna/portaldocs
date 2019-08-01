@@ -110,7 +110,7 @@ When you click on `someresourcename` it will launch the Resource Menu blade as d
 
 ![alt-text](../media/top-extensions-getting-started/AssetTypeBladeName.png "asset type blade name")
 
-For more information on the browse experience see the [browse documentation](https://github.com/Azure/portaldocs/blob/dev/portal-sdk/generated/portalfx-browse.md#building-browse-experiences).
+For more information on the browse experience see the [browse documentation](https://github.com/Azure/portaldocs/blob/b419ea1c8bcc1b574d434c5a356a446810430920/portal-sdk/generated/top-extensions-browse.md).
 
 Now that you know that the `ResourceOverviewBlade` will be opened when you click on the resource you created in Browse its now time to explore Resource Menu blades.
 
@@ -119,7 +119,10 @@ Now that you know that the `ResourceOverviewBlade` will be opened when you click
 
 If you are building an extension for an Azure service then it's likely you have built a resource provider that exposes a top-level resource (e.g. Virtual Machine, Storage account).
 
-If that's the case then the resource menu blade is a great starting point. The idea is that after the user selects a particular resource from the browse experience they land on a menu blade that has a mixture of standard resource features (e.g. activity log, role based access control, Support, etc) and service-specific features (e.g. Tables in a storage account). This section walks through the basics.
+If that's the case then the resource menu blade is a great starting point. The idea is that after the user selects a particular resource from the 
+
+
+experience they land on a menu blade that has a mixture of standard resource features (e.g. activity log, role based access control, Support, etc) and service-specific features (e.g. Tables in a storage account). This section walks through the basics.
 
 Click on your resource from within the browse list it will open the resource menu blade as we previously learned in `Browse.pdl` from `AzurePortalExtension1` this action will open `ResourceOverviewBlade`. 
 

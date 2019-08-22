@@ -564,17 +564,17 @@ Firstly you'll need to craft a KQL query which represents all possible data for 
 | Display name | Expected Column Name | PDL Reference |
 | ------------ | -------------------- | ------------- |
 | Name | name | N/A - Injected as the first column |
-| Resource Id | id | FxColumn.ResourceId |
-| Subscription | N/A | FxColumn.Subscription |
-| SubscriptionId | subscriptionId | FxColumn.SubscriptionId |
-| Resource Group | resourceGroup | FxColumn.ResourceGroup |
-| Resource Group Id | N/A | FxColumn.ResourceGroupId |
-| Location | location | FxColumn.Location |
-| Location Id | N/A | FxColumn.LocationId |
-| Resource Type | N/A | FxColumn.ResourceType |
-| Type | type | FxColumn.AssetType |
-| Kind | kind | FxColumn.Kind |
-| Tags | tags | FxColumn.Tags |
+| Resource Id | id | FxColumns.ResourceId |
+| Subscription | N/A | FxColumns.Subscription |
+| SubscriptionId | subscriptionId | FxColumns.SubscriptionId |
+| Resource Group | resourceGroup | FxColumns.ResourceGroup |
+| Resource Group Id | N/A | FxColumns.ResourceGroupId |
+| Location | location | FxColumns.Location |
+| Location Id | N/A | FxColumns.LocationId |
+| Resource Type | N/A | FxColumns.ResourceType |
+| Type | type | FxColumns.AssetType |
+| Kind | kind | FxColumns.Kind |
+| Tags | tags | FxColumns.Tags |
 | Tenant Id | tenantId | N/A |
 
 <a name="browse-with-azure-resource-graph-kql-query"></a>
@@ -731,9 +731,9 @@ A column tag has 5 properties.
 ### Default columns
 
 To specify default columns you need to declare a property `DefaultColumns` on your `Browse` `PDL` tag.
-Default columns is a comma separated list of column names, a mix of custom columns and framework defined columns from the earlier table. All framework columns are prefixed with `FxColumn.`.
+Default columns is a comma separated list of column names, a mix of custom columns and framework defined columns from the earlier table. All framework columns are prefixed with `FxColumns.`.
 
-For example `DefaultColumns="status, appType, appServicePlanId, FxColumn.location"`.
+For example `DefaultColumns="status, appType, appServicePlanId, FxColumns.location"`.
 
 <a name="browse-with-azure-resource-graph-pdl-definition-full-asset-definition"></a>
 ### Full Asset definition
@@ -745,8 +745,11 @@ It also declares the default columns and their ordering for what a new user of t
 ```xml
 <AssetType>
     <Browse
+        Type="ResourceType"
+        UseCustomConfig="true"
+        UseSupplementalData="true"
         Query="{Query File=./AppServiceQuery.kml}"
-        DefaultColumns="status, appType, appServicePlanId, FxColumn.location">
+        DefaultColumns="status, appType, appServicePlanId, FxColumns.location">
             <Column Name="status"
                   DisplayName="{Resource Columns.status, Module=ClientResources}"
                   Description="{Resource Columns.statusDescription, Module=ClientResources}"

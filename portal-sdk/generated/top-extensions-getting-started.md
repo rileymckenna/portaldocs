@@ -20,25 +20,25 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 <a name="getting-started-with-the-portal-sdk-creating-and-running-an-extension"></a>
 ### Creating and running an Extension
 
-1. Clone the template repo
+1. Install the Azure Portal Developer CLI `npm install -g @microsoft/azureportalcli`
 
-    a. `git clone https://msazure.visualstudio.com/DefaultCollection/One/_git/AzureUX-TemplateExtension`
+**Note**: 
+- To snap to a specific version include the version i.e `npm install -g @microsoft/azureportalcli@5.302.64701`.
+- If @microsoft/azureportalcli is not found or you are not seeing authentication issues e.g `npm ERR! code E401` coming from npm you need to perform the one time authentication step as follows:
 
-1. [Optional] To snap to a specific version of the template in this example SDK version 5.0.302.19601
-    
-    a. `git fetch --tags`
-    
-    a. `git checkout 5.0.302.19601` **Note** replace with version of SDK you which to checkout
+    -  click 'connect to feed' [button on this page](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortal)
 
-1. copy the content of `/src` to your own repo.
-1. Open `/src/Default.sln` in Visual Studio *as Admin*. Optionally you can use VS Code instead of Visual Studio.
-1. Run your extension. In Visual Studio press F5. In Visual Studio Code: `Ctl+Shift+P > Tasks: Run Task > npm: start`
+    - select npm in the left nav of the dialog that opens
+    - follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\youralias\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
 
-	**Note**: If you are not seeing authentication issues e.g `npm ERR! code E401` coming from npm you need to perform the one time authentication step as follows:
-	-  click 'connect to feed' [button on this page](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=AzurePortalNpmRegistry)
-	- select npm in the left nav of the dialog that opens
-	- follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\youralias\\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
-1. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow.
+2. `ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory` 
+3. To launch your extension:
+
+- Run the command prompt **as administrator** > cd ./src/Default/Extension > run command `ap start`
+- Or, Visual Studio Code **as administrator**: `Ctl+Shift+P > Tasks: Run Task > npm: start`
+- Or, Visual Studio **as administrator** > Open `/src/Default.sln` in Visual Studio *as Admin* > Press F5. 
+
+4. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow.
 	
 ![alt-text](../media/top-extensions-getting-started/untrustedextension.png "acceptuntrusted extension")
 		
@@ -230,12 +230,12 @@ In step 2 within the above image the msportalfx-ut TemplateBladeHarness API is u
 To run the tests:
 
 -  right click on the unit test project `AzurePortalExtension1.UnitTests` and select `Open Command Prompt Here`.
-- Type `npm run test` and hit enter.
+- Type `ap run test` and hit enter.
 
 Test run  output:
 
-- Running `npm run test` will run the tests  via karmajs in watch mode. By default tests are run in both Edge and Chrome. Test success and failure will be emitted to the console.
-- Test results are also writing to disk in the ./TestResults folder in both TRX and JUNIT formats which are supported by many CI solutions e.g Azure Dev Ops and Jenkins.  Both the tests and their output can be harvested by these CI solutions to produce reporting as part of the pull request or CI workflows you may have. Note that while running within your CI solution a convenient script is available that you can run as follows `npm run test-ci`. This will perform a single run of the test suite as opposed to running in watch mode. 
+- Running `ap run test` will run the tests  via karmajs in watch mode. By default tests are run in both Edge and Chrome. Test success and failure will be emitted to the console.
+- Test results are also writing to disk in the ./TestResults folder in both TRX and JUNIT formats which are supported by many CI solutions e.g Azure Dev Ops and Jenkins.  Both the tests and their output can be harvested by these CI solutions to produce reporting as part of the pull request or CI workflows you may have. Note that while running within your CI solution a convenient script is available that you can run as follows `ap run test-ci`. This will perform a single run of the test suite as opposed to running in watch mode. 
 
     ![alt-text](../media/top-extensions-getting-started/trxoutput.png "trx output")
 

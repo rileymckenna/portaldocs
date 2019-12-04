@@ -309,3 +309,13 @@ You can ask developer community questions on Stackoverflow with the tag [ibiza-o
 <!--
 gitdown": "include-file", "file": "../templates/portalfx-extensions-glossary-onboarding.md"}
 -->
+
+<a name="steps-to-portal-onboarding-step-4-alerting-onboarding"></a>
+## Step 4 - Alerting Onboarding
+
+In order to ensure that all teams meet quality standard to be included in the Azure Portal, we require teams onboard to our out-of-the box alerting infrastructure. This will not require any deployment on your part, but only submitting a PR with a JSON configuration specifying your thresholds, which you can learn more about in our [alerting onboarding documentation](./top-telemetry-alerting.md) 
+
+The following alerts are required:
+1. Extension SDK Age (automatically opted-in by default when onboarded to alerting)
+1. Performance
+1. Availability 

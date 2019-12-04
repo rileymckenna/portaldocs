@@ -86,7 +86,7 @@ export class MyResourceViewModel
                 enableSupportEventLogs: true,
                 enableSupportHelpRequest: true,
                 enableSupportResourceHealth: true,
-                enableSupportTroubleshoot: true
+                enableSupportTroubleshootv2: true
             },
             groups: <FxMenuBlade.MenuGroup[]>[
                 {

@@ -109,41 +109,77 @@ Remember, your part and blade should both have a single `id` input parameter, wh
 
 If your asset type is in preview, set the `IsPreview="true"` property. If the asset type is GA, simply remove the property (the default is `false`).
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments"></a>
-### How to hide your asset in different environments
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments"></a>
+### How to hide or show your asset in different environments
 
-You can hide your asset in different environments by setting the hideassettypes extension feature flag in your config to a comma-separated list of asset type names.
+You can hide or show your asset in different environments by setting the assettypeoptions extension feature flag in your config which is a rich object
+structure which allows changing not only asset types, but also hiding and showing asset instances in browse and global search as well as hiding and showing
+asset instances with a specific resource kind. *This supersedes the legacy hideassettypes extension feature flag.*
 
-<a href="https://msit.microsoftstream.com/video/7399869a-4f8f-415e-9346-5b77f069b567?st=50" target="_blank">
-  Watch the Hiding Asset Types video here
-  <img src="../media/portalfx-assets/hidingassettypes.png" />
-</a>
-
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-self-hosted"></a>
-#### Self hosted
-
-Replace '*' with the desired environment, for documentation regarding enabling feature flags in self hosted extensions [click here.](portalfx-extension-flags.md#feature-flags)
-
-```xml
-        <Setting name="Microsoft.StbPortal.Website.Configuration.ApplicationConfiguration.DefaultQueryString" value="{
-            '*': {
-                     'microsoft_azure_compute_hideassettypes':"YOUR_ASSET_NAME, YOUR_OTHER_ASSET_NAME"
-            }
-        }" />
+```json
+    {
+        "assettypeoptions": {
+          "YOUR_ASSET_NAME": { "options": "HideAssetType" },
+          "YOUR_OTHER_ASSET_NAME": { "options": "HideAssetType,HideInstances" },
+          "YOUR_THIRD_ASSET_NAME": { "options": "" }
+        }
+    }
 ```
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-hosting-service"></a>
+The "options" value is a comma-separated list of options which will be applied to the asset type:
+
+Options| Result
+--- | ---
+HideAssetType | Hides the asset type from the All services left navigation
+HideInstances | Hides any instances of the asset type in browse and global search
+HideAssetType,HideInstance | Hide the asset type from left navigation AND hides any instances in browse and global search
+*empty string* | This will show the asset type in left navigation AND shows instances in browse and global search
+
+The case of empty string strips off any visibility options provided in PDL. The options are applied to the asset type, essentially replacing the options in PDL.
+
+As mentioned above, visibility of instances with a specific resource kind can also be controlled if the kind is specified in the PDL:
+
+```json
+    {
+        "assettypeoptions": {
+          "YOUR_ASSET_NAME": { "options": "HideAssetType" },
+          "YOUR_OTHER_ASSET_NAME": { "options": "HideAssetType,HideInstances" },
+          "YOUR_THIRD_ASSET_NAME": { "options": "" },
+          "YOUR_ASSET_WITH_KINDS_NAME": { "kinds": { "KIND_NAME": { "options": "HideInstances" } } }
+        }
+    }
+```
+
+In this example, the instances of the asset type 'YOUR_ASSET_WITH_KINDS_NAME' which have the kind of 'KIND_NAME' will be hidden. Note that the 'HideAssetType' option does
+not apply to kind, only the 'HideInstances' option.
+
+There is also no way to show hidden asset types or hide / show specific kinds using the old configuration flags, so please move to 'assettypeoptions'.
+
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-self-hosted"></a>
+#### Self hosted
+
+This now reads the config JSON file for the appropriate environment, so follow the same procedure as for the Hosting service next.
+
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-hosting-service"></a>
 #### Hosting service
 
 If you’re using the hosting service, you can do this by updating your domainname.json (e.g. portal.azure.cn.json file)
 
 ```json
-{
-  "hideassettypes": "YOUR_ASSET_NAME, YOUR_OTHER_ASSET_NAME"
-}
+    {
+        "assettypeoptions": {
+          "YOUR_ASSET_NAME": { "options": "HideAssetType" },
+          "YOUR_OTHER_ASSET_NAME": { "options": "HideAssetType,HideInstances" },
+          "YOUR_THIRD_ASSET_NAME": { "options": "" },
+          "YOUR_ASSET_WITH_KINDS_NAME": { "kinds": { "KIND_NAME": { "options": "HideInstances" } } }
+        }
+    }
 ```
 
-<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-your-asset-in-different-environments-testing-your-hidden-asset"></a>
+**IMPORTANT** These flags cannot be mixed with the legacy 'hideassettypes' flag. If the config provides an 'assettypeoptions' flag, 'hideassettypes' flag
+will be ignored. This is one reason that using 'assettypeoptions' is preferred and use of 'hideassettypes' should be deprecated.
+
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-testing-your-hidden-asset"></a>
 #### Testing your hidden asset
 
 To test enable your hidden asset for testing purposes, you will need to update the hide asset feature flag to exclude the asset you want to show and ensure you have feature.canmodifyextensions set.
@@ -152,13 +188,42 @@ For the desired environment append the following feature flags.
 > If you want to test showing all hidden assets, you can specify all the assets as a comma separated list to the 'showassettypes' extension feature flag.
 
 ```txt
-    ?microsoft_azure_mynewextension_showassettypes=MyNewAsset
+    ?microsoft_azure_mynewextension_assettypeoptions={"MyNewAsset":{"options":""},"MySecondNewAsset":{"options":""}}
 ```
 
 For example:
-https://rc.portal.azure.com/?microsoft_azure_compute_showassettypes=VirtualMachine&microsoft_azure_compute=true&feature.canmodifyextensions=true
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":""}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
 
-or testing the hiding of an asset can be acheived with https:///rc.portal.azure.com/?microsoft_azure_support_hideassettypes=HelpAndSupport
+or testing the hiding of an asset can be achieved with:
+https://rc.portal.azure.com/?microsoft_azure_compute_assettypes={"VirtualMachine":{"options":"HideAssetType"}}&microsoft_azure_compute=true&feature.canmodifyextensions=true
+
+<a name="browse-for-arm-resources-defining-your-asset-type-how-to-hide-or-show-your-asset-in-different-environments-how-the-options-are-applied-from-pdl-from-the-config-json-file-and-from-the-url"></a>
+#### How the options are applied from PDL, from the config JSON file and from the URL
+
+There is a definitive recipe for how visibility options are applied to asset types and kinds from the various sources of PDL, config JSON files and via
+overrides on the URL. The PDL has the lowest priority and should be considered the defaults. Whatever options you apply in PDL will be already applied to
+the asset type. Once the portal loads, the config JSON file for the appropriate domain is loaded and overrides are applied from there. The options flags
+are replaced by the flags from config. The 'assettypeoptions' are applied if present, otherwise 'hideassettypes' are applied if present. Note that if
+both are supplied, only the 'assettypeoptions' will be used. After that, the URL extension feature flag will have the highest priority and will be applied
+last. Again, if the 'MyExtensionName_assettypeoptions' feature flag is in the URL, it will be applied.  Otherwise, if the 'MyExtensionName_showassettypes'
+feature flag is present, it will be applied. Otherwise, if the 'MyExtensionName_hideassettypes' feature flag is present, it will be applied. Note that
+the only asset types affected are those in the config or feature flag. Other asset types will not be affected:
+
+1. PDL flags are baked into the asset type definition at compile time.
+2. Config is applied:
+3. If the 'assettypeoptions' is present, apply any changes, jump to step 5
+4. If the 'hideassettypes' is present, apply any changes, jump to step 5 - this is considered legacy and should be replaced with assettypeoptions.
+5. URL overrides are applied:
+6. If the 'MyExtensionName_assettypeoptions' feature flag is present, apply any changes, jump to end
+7. If the 'MyExtensionName_showassettypes' feature flag is present, apply any changes, jump to end - this is considered legacy and should be replaced with assettypeoptions.
+8. If the 'MyExtensionName_hideassettypes' feature flag is present, apply any changes, jump to end - this is considered legacy and should be replaced with assettypeoptions.
+
+As shown, if 'assettypeoptions' and 'hideassettypes' are all present in the config, the 'hideassettypes' will be ignored. The 'hideassettypes' flag is considered legacy and
+should be replaced with 'assettypeoptions'.
+
+Also, if 'assettypeoptions', 'showassettypes' and 'hideassettypes' are all present in the URL, the 'showassettypes' and 'hideassettypes' will be ignored
+and if only 'showassettypes' and 'hideassettypes' are specified, 'hideassettypes' will be ignored. Both 'showassettypes' and 'hideassettypes' are both considered to be legacy
+and should be replaced with 'assettypeoptions'.
 
 <a name="browse-for-arm-resources-defining-your-asset-type-handling-arm-kinds"></a>
 ### Handling ARM kinds

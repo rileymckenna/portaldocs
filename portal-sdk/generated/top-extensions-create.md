@@ -87,7 +87,7 @@ const engineDisplacement = FxDropDown.create<string>(container, {
                         if (reason === BladeClosedReason.ChildClosedSelf) {
                             const { value } = data;
                             const currentItems = displacementItems();
-                            if (MsPortalFx.findIndex(currentItems, (i) => (<string>ko.unwrap(i.text)).localeCompareIgnoreCase(value) === 0) === -1) {
+                            if (MsPortalFx.findIndex(currentItems, (i) => MsPortalFx.localeCompareIgnoreCase(ko.unwrap(i.text), value) === 0) === -1) {
                                 const newItem = {
                                     text: value,
                                     value: value,

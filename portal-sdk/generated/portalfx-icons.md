@@ -148,29 +148,17 @@ In dark theme, monochromatic icon is presented with color white:
 
 ![Flat icons with dark theme][icon-dark-theme]
 
-If you would like to have color of your icon ***NOT*** be impacted by theme changes, you can supply the `{ isLogo: true }` option to the icon's factory method.
-In the following example, the Delete icon remains **black** in all portal themes.
+If you would like to have color of your icon ***NOT*** be impacted by theme changes, you can supply the the fill color of the SVG yourself.
+
+In the following example, the Delete icon remains **blue** in all portal themes.
 
 ```typescript
 
 /**
- * The flat icon with logo flag.
- */
-public flatIconLogo: MsPortalFx.Base.Image = MsPortalFx.Base.Images.Delete({ isLogo: true });
-
-```
-
-Or, you can also add custom color and use `{isLogo: true}` to preserve it.
-In the following example, the Delete icon keeps **blue** in all portal themes.
-
-```typescript
-
-/**
- * The flat icon with palette and logo flag.
+ * The flat icon with palette.
  */
 public flatIconLogoBlue: MsPortalFx.Base.Image = MsPortalFx.Base.Images.Delete({
     palette: MsPortalFx.Base.ImagePalette.Blue,
-    isLogo: true,
 });
 
 ```

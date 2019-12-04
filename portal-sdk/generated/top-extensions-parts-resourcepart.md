@@ -1,7 +1,7 @@
 <a name="resourcepart"></a>
 ## ResourcePart
 
-The ResourcePart is a part provided by the portal framework for the purpose of pinning ARM resources to dashboards.  Using the resource part to represent pinned resources improves the load times for customer dashboards because the extension which owns the resource is not loaded. For example if 5 resources of different types are pinned using extension provided parts then when the dashboard loads the portal must load 5 different extensions.   However if all 5 extensions are using the resource part which is located in the HubsExtension then the only extension required to be loaded is the Hubs.  
+The ResourcePart is a part provided by the portal framework for the purpose of pinning ARM resources to dashboards.  Using the resource part to represent pinned resources improves the load times for customer dashboards because the extension which owns the resource is not loaded. For example if 5 resources of different types are pinned using extension provided parts then when the dashboard loads the portal must load 5 different extensions.   However if all 5 extensions are using the resource part which is located in the HubsExtension then the only extension required to be loaded is the Hubs.
 
 Extensions can use this part for pinning their resource blades and parts with very little investment. There is the additional benefit that this reduces the amount of code that extensions need to maintain.
 
@@ -10,7 +10,7 @@ Extensions can use this part for pinning their resource blades and parts with ve
 <a name="resourcepart-pinning-resources-from-browse"></a>
 ### Pinning resources from browse
 
-The browse experience can use this part for pinning resources.   This simply requires that the PartName in a AssetType in PDL be "{ResourcePart}".   
+The browse experience can use this part for pinning resources.   This simply requires that the PartName in a AssetType in PDL be "{ResourcePart}".
 
 `\Client\V1\ResourceTypes\Document\Author.pdl`
 
@@ -49,7 +49,7 @@ Legacy blades which were writting in PDL can also be pinned with the ResourcePar
 ```xml
        <TemplateBlade Name="AuthorBlade" .. Pinnable="True".. >
           ..
-           <PinnedResourcePart />     
+           <PinnedResourcePart />
 ```
 
 <a name="resourcepart-redirecting-existing-parts-on-dashboards"></a>
@@ -70,12 +70,12 @@ If this is a existing asset type for which the ResourcePart is replacing a custo
 <a name="resourcepart-displaying-resource-status"></a>
 ### Displaying resource status
 
-The resource part queries the Azure Resource Graph (ARG) for resource status.  However status is calculated differently for each resource type.   Furthermore the status value is not localized.   The extension needs to provide a ARG query that contains the status property.  Furthermore the status column needs to be specified in the resource browse settings.
+This step is optonal.  You can choose to have the resource part to display the resource status by following the instructions below.  The resource part queries the Azure Resource Graph (ARG) for resource status.  However status is calculated differently for each resource type.   Furthermore the status value is not localized.   The extension needs to provide a ARG query that contains the status property.  Furthermore the status column needs to be specified in the resource browse settings.
 
 <a name="resourcepart-displaying-resource-status-authoring-a-arg-query"></a>
 #### Authoring a ARG query
 
-In the portal SDK ARG queries are saved in text files with the .kml extension.  ARG queries are very similar Kusto queries.  The portal has a ARQ query blade which can be used to author and test the query.   
+In the portal SDK ARG queries are saved in text files with the .kml extension.  ARG queries are very similar Kusto queries.  The portal has a ARQ query blade which can be used to author and test the query.
 
 https://portal.azure.com/#blade/HubsExtension/ARGQueryBlade
 
@@ -104,7 +104,7 @@ Here is a sample AssetType which has these.   This sample is also included in th
              PartName="{ResourcePart}">
     <Browse Type="ResourceType"
             UseCustomConfig="true"
-            UseSupplementalData="true" 
+            UseSupplementalData="true"
             Query="{Query File=./VirtualServerQuery.kml}"
             DefaultColumns=" status">
       <Summary StatusColumn="status" />
@@ -131,4 +131,4 @@ where type == 'microsoft.test/printers'
     tolower(properties.status) == 'out-of-paper', '{{Resource Status.Printer.outOfPaper, Module=ClientResources}}',
     'Unknown')
 ```
-    
+

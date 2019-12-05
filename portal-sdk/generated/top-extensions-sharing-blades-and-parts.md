@@ -13,7 +13,8 @@ When developing your Blades and Parts, it's fairly simply to mark Blades/Parts t
 
 ```typescript
 
-import { BladeReferences, PartReferences } from "Fx/Composition";
+import { ExportedBladeReference } from "_generated/SamplesExtension/BladeReferences";
+import { ExportedPartReference } from "_generated/SamplesExtension/PartReferences";
 
 ```
 
@@ -21,13 +22,11 @@ import { BladeReferences, PartReferences } from "Fx/Composition";
 
 public onOpenImportedBladeClick() {
     const { container } = this.context;
-    container.openBlade(BladeReferences.forExtension("SamplesExtension").forBlade("ExportedBlade").createReference({
-        parameters: { parameter1: "42" },
-    }));
+    container.openBlade(new ExportedBladeReference({ parameter1: "42" }));
 }
 
 public onPinImportedPartClick() {
-    pin([PartReferences.forExtension("SamplesExtension").forPart("ExportedPart").createReference({ parameters: { parameter1: "42" } })]);
+    pin([ new ExportedPartReference({ parameter1: "42" }) ]);
 }
 
 ```
@@ -88,7 +87,7 @@ declare namespace SamplesExtension {
            parameter1?: string;
        }
    }
-   
+
 ```
 
 Notice that you'll partition your types using TypeScript namespaces, following a structure that reflects `<YourExtensionName>.<YourBladeOrPartName>.Parameters`.  This makes your types discoverable to teams that make use of this `.d.ts` file.  It also allows you to cleanly add new types as you export more Blades and Parts in the future.
@@ -127,7 +126,8 @@ Now, partner team's UI can make use of these new `BladeReferences`/`PartReferenc
 
 ```typescript
 
-import { BladeReferences, PartReferences } from "Fx/Composition";
+import { ExportedBladeReference } from "_generated/SamplesExtension/BladeReferences";
+import { ExportedPartReference } from "_generated/SamplesExtension/PartReferences";
 
 ```
 
@@ -135,13 +135,11 @@ import { BladeReferences, PartReferences } from "Fx/Composition";
 
 public onOpenImportedBladeClick() {
     const { container } = this.context;
-    container.openBlade(BladeReferences.forExtension("SamplesExtension").forBlade("ExportedBlade").createReference({
-        parameters: { parameter1: "42" },
-    }));
+    container.openBlade(new ExportedBladeReference({ parameter1: "42" }));
 }
 
 public onPinImportedPartClick() {
-    pin([PartReferences.forExtension("SamplesExtension").forPart("ExportedPart").createReference({ parameters: { parameter1: "42" } })]);
+    pin([ new ExportedPartReference({ parameter1: "42" }) ]);
 }
 
 ```

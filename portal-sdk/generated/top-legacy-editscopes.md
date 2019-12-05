@@ -527,13 +527,13 @@ The code instantiates an `EditScope` by using a `MsPortalFx.Data.EditScopeView` 
 
 const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
     supplyExistingData: (websiteId) => {
-        return FxBaseNet.ajax({
+        return FxBaseNet.ajax<any>({
             uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)), // this particular endpoint requires sessionId to be in query string
             type: "GET",
             dataType: "json",
             cache: false,
             contentType: "application/json",
-        }).then((data: any) => {
+        }).then((data) => {
             // after you get the data from the ajax query you can do whatever transforms
             // you want in it to turn it into the model type you've defined
             return {
@@ -552,7 +552,7 @@ const editScopeCache = EditScopeCache.createNew<WebsiteModel, number>({
         const serializableWebsite = ko.toJSON(website);
 
         this._saving(true);
-        return FxBaseNet.ajax({
+        return FxBaseNet.ajaxExtended({
             uri: Util.appendSessionId(MsPortalFx.Base.Resources.getAppRelativeUri("/api/Websites/" + websiteId)),
             type: "POST",
             dataType: "json",

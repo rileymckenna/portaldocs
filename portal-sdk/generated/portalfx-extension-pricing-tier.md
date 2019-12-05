@@ -157,7 +157,7 @@ const filteredSpecIds = ko.computed(container, () => {
     // been filtered out by the billing calls.
     return input.availableSpecData().filter((spec) => {
         // This will filter out any spec which contains the feature in input.options.filterFeatures
-        return !spec.features.first((feature) => (feature.displayValue !== null && feature.displayValue !== undefined) && !!~filterFeatures.indexOf(feature.displayValue.toString()));
+        return !MsPortalFx.find(spec.features, (feature) => (feature.displayValue !== null && feature.displayValue !== undefined) && !!~filterFeatures.indexOf(feature.displayValue.toString()));
     }).map((spec) => spec.id);
 });
 ko.reactor(container, () => {

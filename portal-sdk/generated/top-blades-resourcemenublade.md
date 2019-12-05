@@ -187,7 +187,6 @@ The following options are available on  the `getMenuConfig` method.
 | `enableSupportEventLogs`      | View all operations and events | Yes | Resources, resource groups, subscriptions | 
 | `enableSupportHelpRequest`    | Create a support request for this resource, resource group, or subscription. | Yes | All ARM resource types | 
 | `enableSupportResourceHealth` | Check resource for common health issues (e.g. connectivity) and recommend fixes. |Yes | No | 
-| `enableSupportTroubleshoot`   | **Deprecated. Do not use.** Legacy support only. Moved to a new design with improved usability scores. | No  | No | 
 | `enableSupportTroubleshootV2` | Troubleshoot possible availability/reliability issues (e.g. connectivity). | Yes | No | 
 | `enableTags`                  | Tag resource with key/value pairs to group/organize related resources. RP must support PATCH operations to update tags. Does not support classic resources. | Yes | Resources, resource groups, subscriptions | 
 | `showAppInsightsFirst`        | View Application Insights monitoring. `enableAppInsights` must be set to `true`. | No  | No | 
@@ -200,7 +199,7 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableSupportTroubleshoot: true,
+                enableSupportTroubleshootV2: true,
                 enableSupportResourceHealth: true
             },
             groups: <FxMenuBlade.MenuGroup[]>[
@@ -269,7 +268,7 @@ public getMenuConfig(resourceInfo: MsPortalFx.Assets.ResourceInformation): MsPor
         <MsPortalFx.Assets.ResourceMenuConfig>{
             defaultItemId: "overview",
             options: {
-                enableSupportTroubleshoot: true,
+                enableSupportTroubleshootV2: true,
                 enableSupportResourceHealth: true
             },
             groups: <FxMenuBlade.MenuGroup[]>[

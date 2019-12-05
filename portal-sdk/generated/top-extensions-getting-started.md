@@ -22,7 +22,7 @@ The Azure Portal SDK includes everything you need to build extensions for the po
 
 1. Install the Azure Portal Developer CLI `npm install -g @microsoft/azureportalcli`
 
-**Note**: 
+**Note**:
 - To snap to a specific version include the version i.e `npm install -g @microsoft/azureportalcli@5.302.64701`.
 - If @microsoft/azureportalcli is not found or you are not seeing authentication issues e.g `npm ERR! code E401` coming from npm you need to perform the one time authentication step as follows:
 
@@ -31,17 +31,17 @@ The Azure Portal SDK includes everything you need to build extensions for the po
     - select npm in the left nav of the dialog that opens
     - follow the instructions in the dialog. If done correctly the PAT (secret) should be added to a .npmrc in your c:\users\youralias\.npmrc this file with the PAT should not be checked in and should be treated as a secret. The .npmrc file in  Extension\\.npmrc will not have a PAT but will have the registry.  Authentication should now succeed.
 
-2. `ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory` 
+2. `ap new -n Microsoft_Azure_YourExtension -o ./targetdirectory`
 3. To launch your extension:
 
 - Run the command prompt **as administrator** > cd ./src/Default/Extension > run command `ap start`
 - Or, Visual Studio Code **as administrator**: `Ctl+Shift+P > Tasks: Run Task > npm: start`
-- Or, Visual Studio **as administrator** > Open `/src/Default.sln` in Visual Studio *as Admin* > Press F5. 
+- Or, Visual Studio **as administrator** > Open `/src/Default.sln` in Visual Studio *as Admin* > Press F5.
 
 4. Your extension will now be side loaded into the production portal. The portal will prompt you to allow your side loaded extension. Click allow.
-	
-![alt-text](../media/top-extensions-getting-started/untrustedextension.png "acceptuntrusted extension")
-		
+
+![alt-text](../media/top-extensions-getting-started/untrustedextension.png "accept untrusted extension")
+
 Congratulations! You've just created your first extension.
 You will find that the project template has implemented many of the key components of an extension.
 
@@ -60,12 +60,12 @@ The marketplace offers users a consistent way to browse and search the set of cu
 
 In the browser that has the portal and your side loaded extension, go to the marketplace by:
 
-1. Clicking `+Create a resource` 
+1. Clicking `+Create a resource`
 1. Then, click `See all`.
 
 	![alt-text](../media/top-extensions-getting-started/marketplace1.png "marketplace create resource see all link")
 
-Then click the `Local Development` category. A marketplace item will appear that matches the name you selected when creating your project. 
+Then click the `Local Development` category. A marketplace item will appear that matches the name you selected when creating your project.
 
 ![alt-text](../media/top-extensions-getting-started/marketplace2.png "marketplace create resource")
 
@@ -121,7 +121,7 @@ If you are building an extension for an Azure service then it's likely you have 
 
 If that's the case then the resource menu blade is a great starting point. The idea is that after the user selects a particular resource from the browse experience they land on a menu blade that has a mixture of standard resource features (e.g. activity log, role based access control, Support, etc) and service-specific features (e.g. Tables in a storage account). This section walks through the basics.
 
-Click on your resource from within the browse list it will open the resource menu blade as we previously learned in `Browse.pdl` from `AzurePortalExtension1` this action will open `ResourceOverviewBlade`. 
+Click on your resource from within the browse list it will open the resource menu blade as we previously learned in `Browse.pdl` from `AzurePortalExtension1` this action will open `ResourceOverviewBlade`.
 
 Many of the standard Azure experiences such as tags, locks, and access control have been automatically injected into your menu.
 
@@ -146,21 +146,21 @@ As an exercise review the ResourceOverviewBlade.ts source and try to map the com
 ### Adding a Blade
 Blades are the main unit of UX that can be built using the SDK. They are basically pages that can be loaded in the portal.
 
-- In solution explorer `right click` the `Blades folder > Select Add > New folder`. Name the folder HelloWorld 
-- `Right Click` the `HelloWorld` folder and select `Add > Class… > select TypeScript File > name it HelloWorldBlade.ts`  
+- In solution explorer `right click` the `Blades folder > Select Add > New folder`. Name the folder HelloWorld
+- `Right Click` the `HelloWorld` folder and select `Add > Class… > select TypeScript File > name it HelloWorldBlade.ts`
 - Add the following TemplateBlade code and read through the comments to understand each component
-	
+
 ```typescript
     import * as TemplateBlade from "Fx/Composition/TemplateBlade";
     import { DataContext } from "../../ResourceArea";
-    
+
     /*
      * Defines the contract of input parameters required by this blade
      */
     export interface Parameters {
         readonly id: string;
     }
-    
+
     /*
      * The template blade decorator lets the framework discover your blade. It is also where you define the html template.
      * This template shows a simple text data - binding(corresponding data - binding code is below).
@@ -173,14 +173,14 @@ Blades are the main unit of UX that can be built using the SDK. They are basical
         public readonly title = "My blade title";
         public readonly subtitle = "My blade subtitle";
         // There are useful framework APIs that are exposed off context, parameters is one example.
-        public context: TemplateBlade.Context<Parameters, DataContext>; 
-    
+        public context: TemplateBlade.Context<Parameters, DataContext>;
+
         // This property is bound to the htmlTemplate supplied in the TemplateBlade.Decorator
-        public readonly helloWorldMessage = ko.observable("Hello world!"); 
-    
+        public readonly helloWorldMessage = ko.observable("Hello world!");
+
         public onInitialize() {
             //demonstrates using a parameter that was passed to the blade
-            this.helloWorldMessage(`Hello World - id: ${this.context.parameters.id}`); 
+            this.helloWorldMessage(`Hello World - id: ${this.context.parameters.id}`);
             // run any initialization code you need here
             return Q();   // if you load data then return a loading promise here
         }
@@ -191,19 +191,19 @@ Blades are the main unit of UX that can be built using the SDK. They are basical
 - Compile the solution `Ctl + Shift + B`
 
 Now that your blade successfully compiles lets provide a means for users to navigate to it in the portal. Recall the Resource Overview Blade had a Resource Menu. Lets update the resource menu to open the HelloWorldBlade when `Item1` in the menu is clicked.
-	
+
 - Open `Client\Resource\MyResourceViewModel.ts` and locate the `getMenuConfig` function we previously explored.
 - Locate `mRSG_item1` and update the supplyBladeReference to return the HelloWorldBladeReference
 
     ![alt-text](../media/top-extensions-getting-started/updatebladeopen.png "update blade open")
 
 Note: that if HellowWorldBladeReference is not available on BladeReferences then you need to ensure the solution has compiled correctly as the blade references are generated as part of build.
-	
+
 Now that you have finished adding your blade and have provided a means to navigate to it lets try it out.
 
 - Rebuild and Run your extension `Ctl + F5`
 - Navigate back to your resource blade `All Resources` -> set filter to `My Resources` -> Click your resource
-- Click on the `Item1` menu item which you just updated to open your new 
+- Click on the `Item1` menu item which you just updated to open your new
 HelloWorldBlade and observe that the content now displays the message and ID that was passed as a parameter to your blade.
 
     ![alt-text](../media/top-extensions-getting-started/openhelloworldblade.png "open hello world blade")
@@ -235,7 +235,7 @@ To run the tests:
 Test run  output:
 
 - Running `ap run test` will run the tests  via karmajs in watch mode. By default tests are run in both Edge and Chrome. Test success and failure will be emitted to the console.
-- Test results are also writing to disk in the ./TestResults folder in both TRX and JUNIT formats which are supported by many CI solutions e.g Azure Dev Ops and Jenkins.  Both the tests and their output can be harvested by these CI solutions to produce reporting as part of the pull request or CI workflows you may have. Note that while running within your CI solution a convenient script is available that you can run as follows `ap run test-ci`. This will perform a single run of the test suite as opposed to running in watch mode. 
+- Test results are also writing to disk in the ./TestResults folder in both TRX and JUNIT formats which are supported by many CI solutions e.g Azure Dev Ops and Jenkins.  Both the tests and their output can be harvested by these CI solutions to produce reporting as part of the pull request or CI workflows you may have. Note that while running within your CI solution a convenient script is available that you can run as follows `ap run test-ci`. This will perform a single run of the test suite as opposed to running in watch mode.
 
     ![alt-text](../media/top-extensions-getting-started/trxoutput.png "trx output")
 
@@ -261,17 +261,17 @@ Ask questions on: [stackoverflow.microsoft.com](https://stackoverflow.microsoft.
 ### I receive a &quot;this site is not secure&quot; or &quot;your connection is not private&quot; error when running the extension
 
 Example in Edge:
-    
+
 ![alt-text](../media/top-extensions-getting-started/cert1.png "cert error in Edge")
 
 Example in chrome Chrome:
 Your connection is not private
 Attackers might be trying to steal your information from localhost (for example, passwords, messages, or credit cards). Learn more
 NET::ERR_CERT_AUTHORITY_INVALID
-	
+
 ![alt-text](../media/top-extensions-getting-started/cert2.png "cert error in Chrome")
 
-Solution: 
+Solution:
 
 - Save the certificate to disk by clicking those areas highlighted in red.
 

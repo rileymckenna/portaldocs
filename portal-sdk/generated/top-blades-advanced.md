@@ -107,34 +107,53 @@ import * as ClientResources from "ClientResources";
 import { ClickableLink } from "Fx/Composition";
 import * as TemplateBlade from "Fx/Composition/TemplateBlade";
 import * as BladesArea from "../BladesArea";
+import * as Dropdown from "Fx/Controls/DropDown";
 
 @TemplateBlade.Decorator({
-    htmlTemplate: "" +
-        "<div><a data-bind='fxclick: onShowStatusClick'>Click</a> to show/clear status bar.</div>",
+    htmlTemplate: `
+<div class="ext-bladewithstatus-root">
+    <div class="ext-statusoptions" data-bind="pcControl: statusBarState"/>
+</div>`,
 })
 @TemplateBlade.InjectableModel.Decorator(BladesArea.DataContext)
 export class TemplateBladeWithStatusBar {
     public title = ClientResources.templateBladeWithStatusBar;
     public subtitle: string;
 
+    // Dropdown that manages the status of the blade and therefore the status bar
+    public statusBarState: Dropdown.Contract<TemplateBlade.ContentState>;
+
     public context: TemplateBlade.Context<void, BladesArea.DataContext>;
 
     public onInitialize() {
-        return Q();  // This sample loads no data.
-    }
-
-    public onShowStatusClick() {
         const { container } = this.context;
-        const currentStatus = container.statusBar();
-        if (currentStatus) {
-            container.statusBar(undefined);
-        } else {
+
+        // Create the Status dropdown
+        this.statusBarState = Dropdown.create<TemplateBlade.ContentState>(container, {
+            label: "Select the type of the status bar",
+            subLabel: "Note: 'None' means there is no Status and therefore no Status Bar",
+            suppressDirtyBehavior: true,
+            items: [
+                { text: "None", value: TemplateBlade.ContentState.None },
+                { text: "Warning", value: TemplateBlade.ContentState.Warning },
+                { text: "Error", value: TemplateBlade.ContentState.Error },
+                { text: "Dirty", value: TemplateBlade.ContentState.Dirty },
+                { text: "Info", value: TemplateBlade.ContentState.Info },
+                { text: "Upsell", value: TemplateBlade.ContentState.Upsell },
+                { text: "Complete", value: TemplateBlade.ContentState.Complete },
+            ],
+            value: TemplateBlade.ContentState.None,
+        });
+
+        // Subscribe to the changes of statusBarState to dictate the Status Bar
+        this.statusBarState.value.subscribe(container, statusBarState => {
             container.statusBar({
                 text: ClientResources.templateBladeWithStatusBarMessage,
-                state: TemplateBlade.ContentState.Warning,
-                onClick: new ClickableLink(ko.observable("http://www.bing.com")),
+                state: statusBarState,
+                onClick: new ClickableLink("http://www.bing.com"),
             });
-        }
+        });
+        return Q(); // This sample loads no data.
     }
 }
 

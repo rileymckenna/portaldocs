@@ -8,6 +8,13 @@
 <a name="telemetry"></a>
 # Telemetry
 * [Getting Started](portalfx-telemetry-getting-started.md#getting-started)
+    * [Pre-requisites](portalfx-telemetry-getting-started.md#pre-requisites)
+    * [Kusto Cluster Information](portalfx-telemetry-getting-started.md#kusto-cluster-information)
+    * [User Access and Permissions](portalfx-telemetry-getting-started.md#user-access-and-permissions)
+    * [Programmatic Access](portalfx-telemetry-getting-started.md#programmatic-access)
+    * [FAQ](portalfx-telemetry-getting-started.md#faq)
+    * [Resources](portalfx-telemetry-getting-started.md#resources)
+    * [Contact Links](portalfx-telemetry-getting-started.md#contact-links)
 
 * [Kusto Telemetry](portalfx-telemetry-kusto-databases.md#kusto-telemetry)
 

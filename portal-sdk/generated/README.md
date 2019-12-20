@@ -85,6 +85,31 @@ Azure portal extension development is supported on Windows Server 2012 R2, and W
 
 [Ask an SDK setup question on StackOverflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-sdkupdate)
 
+<a name="azure-portal-extension-development-documentation-development-guide-azure-portal-extension-developer-cli"></a>
+### Azure Portal Extension Developer CLI
+The Azure portal extension developer CLI, namely `ap`, is the foundational tool used for all inner dev/test loop actions during extension development and includes commands such as new, restore, build, serve, start, release, lint, run test, watch and update.
+
+* [CLI Overview](/portal-sdk/generated/top-ap-cli.md#cli-overview)
+
+* [Setup and Installation](/portal-sdk/generated/top-ap-cli.md#setup-and-installation)
+
+* [Basic Workflows](/portal-sdk/generated/top-ap-cli.md#basic-workflows)
+
+* [Command Reference](/portal-sdk/generated/top-ap-cli.md#command-reference)
+
+* [Linting directly within VS Code](/portal-sdk/generated/top-ap-cli.md#linting-directly-within-vscode)
+
+* [Customizing Lint Rules](/portal-sdk/generated/top-ap-cli.md#customizing-lint-rules)
+
+* [Extending the cli with your teams own commands](/portal-sdk/generated/top-ap-cli.md#extending-the-cli-with-your-teams-own-commands)
+
+* [Overriding the behavior of existing commands](/portal-sdk/generated/top-ap-cli.md#overriding-the-behavior-of-existing-commands)
+
+* [Contributions and Feedback](/portal-sdk/generated/top-ap-cli.md#contributions-and-feedback)
+
+* [FAQ](/portal-sdk/generated/top-ap-cli.md#faq)
+
+
 <a name="azure-portal-extension-development-documentation-development-guide-samples"></a>
 ### Samples
 

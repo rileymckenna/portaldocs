@@ -13,6 +13,7 @@ This document details the usage and extensibility points of the ap CLI.  The fol
 The following steps detail the one time configuration that must be applied to authenticate against the internal AzurePortal registry for both NuGet and npm.  If you prefer follow along see the step by step: [Video:One time configuration steps](https://msit.microsoftstream.com/video/d1f15784-da81-4354-933d-51e517d38cc1?st=657)
 
  - Install the LTS of nodejs [download](https://nodejs.org/en/download)
+ - Install the .NET 4.7.2 *Developer Pack* - [located here](https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer)
  - NuGet Credential provider
     1. Connect to the AzurePortal Feed https://msazure.visualstudio.com/One/_packaging?_a=connect&feed=AzurePortal
     1. Select NuGet.exe under the NuGet header
@@ -33,11 +34,17 @@ The following steps detail the one time configuration that must be applied to au
         registry=https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
         always-auth=true
         ```
-    1. From the command prompt in the same directory generate a readonly PAT using vsts-npm-auth
-        ```
-        vsts-npm-auth -R -config .npmrc
-        ```
-        Generally the PAT will be written to %USERPROFILE%\.npmrc we strongly recommend not checking your PAT into source control; anyone with access to your PAT can interact with Azure DevOps Services as you.
+    1. From the command prompt in the same directory:
+        - set the default npm registry 
+           ```
+           npm config set registry https://msazure.pkgs.visualstudio.com/_packaging/AzurePortal/npm/registry/
+           ```
+        - generate a readonly PAT using vsts-npm-auth
+           ```
+           vsts-npm-auth -R -config .npmrc
+           ```
+           Generally the PAT will be written to %USERPROFILE%\.npmrc we strongly recommend not checking your PAT into source control; anyone with access to your PAT can interact with Azure DevOps Services as you.
+        
 
  - Path
     Ensure the following are on your path i.e resolve when typed in and run from the command prompt.

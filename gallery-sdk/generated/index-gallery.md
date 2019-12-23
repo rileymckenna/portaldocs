@@ -363,8 +363,8 @@ The package will contain 1 or more ARM template stored in the DeploymentTemplate
 
 <a name="gallery-item-specificiations-gallery-package-management-getting-the-gallery-tools"></a>
 #### Getting the Gallery Tools
-You can find the latest version (5.2.1.569 or above) of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the official NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official). Please only use packages with major version 5. Do not use major version 10, i.e., use 5.*.*.* and do not use 10.*.*.*
-
+You can find the latest version of the gallery tools (Microsoft.Azure.Gallery.AzureGalleryUtility) in the official NuGet feed: [https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official](https://msazure.visualstudio.com/One/_packaging?_a=feed&feed=Official). Please only use packages with major version 5. Do not use major version 10, i.e., use 5.*.*.* and do not use 10.*.*.*
+Download the latest version (5.2.1.606, but there might be newer version, you can check by the publish date/time)
 
 <a name="gallery-item-specificiations-gallery-package-management-creating-an-azure-gallery-package"></a>
 #### Creating an Azure Gallery Package
@@ -638,24 +638,37 @@ You can include any number of components. Components are used to primarily to sp
 
 <a name="gallery-item-metadata-categories"></a>
 ## Categories
-Each gallery item can be "tagged" with a variety of categories. The common categories in use today are:
+Each gallery item can be "tagged" with a variety of categories. 
+You can categorize the offer to be under L1 (Level 1) category or L2 (Level 2) category
+In order to appear under L2 category you will need to provide both the L2 and the L1 parent category id.
 
-* **appInfrastructure** - Application infrastructure
-* **clientOS** - Client Operating System
-* **devService** - Developer service
+The following are common L1 categories.
+The left hand side is the category id that needs to be provided, and the right hand side is the category display name:
+
+* **compute** - Compute 
 * **networking** - Networking
 * **database** - Database
-* **cache** - Cache
 * **security** - Security
-* **compliance** - Compliance
 * **storage** - Storage
-* **bigData** - Big Data
-* **backup** - Backup
+* **analytics** - Analytics
 * **analytics** - Analytics
 * **businessApplication** - Business Application
 * **media** - Media
 * **web** - Web
-* **identity** - Identity
+* **security** - Security
+
+
+
+The following are common L2 categories.
+The left hand side is the category ids that needs to be provided, and the right hand side is the categories display name ( L1 -> L2):
+
+* **compute, appInfrastructure** - Compute -> Application
+* **compute, clientOS** - Compute -> Client Operating System
+* **developer-tools, devService** - Developer Tools > Developer Service
+* **compute, cache** - Compute -> Cache
+* **analytics, bigData** - Analytics -> Big Data
+* **storage, backup** - Storage -> Backup
+* **it-and-management-tools, businessApplication** - IT & Management Tools -> Business Application
 
 
 

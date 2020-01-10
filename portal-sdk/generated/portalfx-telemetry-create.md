@@ -24,6 +24,34 @@ CreateFlow table in Kusto database **AzPtlCosmos** called **CreateFlows**
 
 Accessible through using the function: **GetCreateFlows(startDate: datetime, endDate: datetime)**
 
+**Description**
+
+A CreateFlow row is a flattened telemetry timeline comprised of the following create related telemetry events (in order of their trigger in the timeline of a create flow):
+- CreateFlowLaunched (CFL) - Marketplace create blade opened
+- ProvisioningBladeOpened (PBO) - Nonpdl blade that creates resources opened (can be from marketplace or not)
+- ProvisioningStarted (PS) - Portal create started
+- CreateDeploymentStart (CDS) - Create accepted by ARM
+- CreateDeploymentEnd (CDE) - Create completed by ARM
+- ProvisioningEnded (PE) - Portal create completed
+
+**Rules about the which events make up a create flow**
+
+- Every CreateFlow row will have the PS,PE,CDS,CDE events 
+- A createflow used to be only started with a CFL event, but now can be started with a ProvisioningBladeOpened PBO event as well.
+- A createflow can have either the CFL or the PBO event, or only 1, but must have at least 1.
+
+**Rules about which events start a create flow (CFL and PBO)**
+
+- CFL but no PBO
+  - FromMarketplace == true
+    - This is a marketplace create with an old pdl blade
+  - FromMarketplace == false
+    - This is a nonmarketplace create with an old pdl blade
+- PBO but no CFL
+  - This is always a nonmarketplace create with a nonpdl blade, so FromMarketplace will alway be false
+- CFL and PBO
+  - This is always a marketplace create with a nonpdl blade, so FromMarketplace will always be true
+
 <a name="create-telemetry-create-flow-functions"></a>
 ## Create Flow Functions
 

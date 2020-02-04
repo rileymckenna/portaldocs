@@ -19,6 +19,7 @@
     * [How is mapping done from extension name to IcM team and service names](#what-happens-if-i-need-to-update-my-configuration-how-is-mapping-done-from-extension-name-to-icm-team-and-service-names)
     * [How to enable alerts for national clouds](#what-happens-if-i-need-to-update-my-configuration-how-to-enable-alerts-for-national-clouds)
 * [Timezone based alerting](#timezone-based-alerting)
+    * [How partners route alerts to another team in IcM](#timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm)
 
 
 <a name="overview"></a>
@@ -35,15 +36,17 @@ Once an alert is triggered it will automatically open an IcM on the owning team.
 There are number of framework provided alerts:
 
 1. Extension SDK age
-    - Sev3 IcM incdient for an extension when its SDK is older than 60 days
+    - Sev3 IcM incident for an extension when its SDK is older than 60 days
     - Sev2 for over 90 days
     
     Note: You can set the time of the day at which you want to trigger an SDK age alert. Learn more about timezone based alerting [here](#timezone-based-alerting).
-1. Extension alive
+1. Extension Alive
+1. Telemetry Throttled
+    - Sev4 IcM incident for an extension when its ExtTelemetry logs reach above 200 events every 60 seconds per user per browser tab. We stop logging ExtTelemetry events utill the next window starts.
 1. Performance
 1. Availability
 1. Client Error
-1. Create regression
+1. Create Regression
 
 Some of these alert types are configurable per extension. The following alerts types currently support extension configuration:
 
@@ -199,14 +202,13 @@ This only applies to blades or parts and defines what blades or parts you wish t
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
 Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates percentileDuration and affectedUserCount, it does not take safe deployment stage into consideration. So you won't have percentileDuration and affectedUserCount per safe deployment stage. For such a case, percentileDurationThresholdInMilliseconds, minAffectedUserCount and bottomMinAffectedUserCount specified in critiera are for all(combined, overall) the safe deployment stages.
-For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
 <a name="performance-configuration-what-is-datacentercode"></a>
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
 Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates percentileDuration and affectedUserCount, it does not take datacenter into consideration. So you won't have percentileDuration and affectedUserCount per datacenter. For such a case percentileDurationThresholdInMilliseconds, minAffectedUserCount and bottomMinAffectedUserCount specified in critiera are for all(combined, overall) the datacenters.
-For the complete list of datacenter code names, go to [https://aka.ms/portalfx/alerting/datacenter-code-name][datacenter-code-name]
+For the complete list of datacenter code names, go to [datacenter code list](https://aka.ms/portalfx/alerting/datacenter-code-name)
 
 <a name="performance-configuration-when-do-the-alerts-trigger"></a>
 #### When do the alerts trigger
@@ -358,14 +360,13 @@ This only applies to blades or parts and defines what blades or parts you wish t
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
 Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take safe deployment stage into consideration. So you won't have availability, failureCount and failureUserCount per safe deployment stage. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the safe deployment stages. 
-For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
 <a name="availability-configuration-1-what-is-datacentercode-1"></a>
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
 Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates availability, failureCount and failureUserCount, it does not take datacenter into consideration. So you won't have availability, failureCount and failureUserCount per datacenter. For such a case, minAvailability, minFailureCount and minFailureUserCount specified in critiera are for all(combined, overall) the datacenters.
-For the complete list of datacenter code names, go to [https://aka.ms/portalfx/alerting/datacenter-code-name][datacenter-code-name]
+For the complete list of datacenter code names, go to [datacenter code list](https://aka.ms/portalfx/alerting/datacenter-code-name)
 
 <a name="availability-when-do-the-alerts-trigger-1"></a>
 ### When do the alerts trigger
@@ -571,14 +572,13 @@ This is the logical operator for messages in "exclusion" property. Its supported
 
 Safe deployment stage can be "0", "1", "2", or "3". Each stage has a batch of regions. It does not support asterisk("*") sign.
 Safe deployment stage is optional. If you don't specify the safe deployment stage property in critera, when alerting calculates affectedUserCount, affectedUserPercentage, it does not take safe deployment stage into consideration. So you won't have affectedUserCount or affectedUserPercentage per safe deployment stage. For such a case, minAffectedUserCount or minAffectedUserPercentage specified in critiera are for all(combined, overall) the safe deployment stages.
-For the complete list of safe deployment stages and their regions, go to [https://aka.ms/portalfx/alerting/safe-deployment-stage][safe-deployment-stage]
 
 <a name="client-error-configuration-2-what-is-datacentercode-2"></a>
 #### What is datacenterCode
 
 Datacenter code can be "`*`", "AM", "BY", etc. "`*`" represents all Azure Portal Production regions.
 Datacenter code is optional. If you don't specify the datacenterCode property in critera, when alerting calculates affectedUserCount or affectedUserPercentage, it does not take datacenter into consideration. So you won't have affectedUserCount or affectedUserPercentage per datacenter. For such a case, minAffectedUserCount or minAffectedUserPercentage specified in critiera are for all(combined, overall) the datacenters. 
-For the complete list of datacenter code names, go to [https://aka.ms/portalfx/alerting/datacenter-code-name][datacenter-code-name]
+For the complete list of datacenter code names, go to [datacenter code list](https://aka.ms/portalfx/alerting/datacenter-code-name)
 
 <a name="client-error-how-often-client-error-alerts-run"></a>
 ### How often client error alerts run
@@ -825,4 +825,10 @@ Here is an example of how to specify `businessHourStartTimeUtc` in the config fo
 
 If no value is specified for `businessHourStartTimeUtc`, alerts are triggered in PST business hours by default.
 
+<a name="timezone-based-alerting-how-partners-route-alerts-to-another-team-in-icm"></a>
+### How partners route alerts to another team in IcM
+By default all the alerts are fired against Azure Portal (IbizaFx) team and IbizaFx team maintains an IcM routing table by which alerts are routed to different services and teams.
+Since IcM does not support secondary routing, once extension partners receive an IcM, they can't route it to another service or team in IcM even if they have their own IcM routing table.
+The workaround is to fire alerts directly to partners in IcM, which requires partners to create a custom connector in IcM, onboard a certficate to it and add connector Id into customization JSON.
+For details refer to [TSG: How partners route alerts to another team in IcM](https://aka.ms/IbizaFxTsg_HowPartnerRouteIcm)
 

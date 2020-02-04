@@ -17,7 +17,7 @@ Ibiza portal tracks several pieces of information as users navigate through the 
 
 > **Note**: Currently, telemetry is made available to partners through Kusto. All Azure employees should have access, if you don't have access ensure you have joined your team's standard access group and it's listed here [http://aka.ms/standardaccess](http://aka.ms/standardaccess). If it is not listed then please reach out to [Ibiza Telemetry](mailto:ibiza-telemetry@microsoft.com).
 
-You can access our Kusto cluster using <a href="https://azportal.kusto.windows.net/AzurePortal" target="_blank" title="Kusto">Kusto Explorer</a> or 
+You can access our Kusto cluster using <a href="https://azportal.kusto.windows.net/AzurePortal" target="_blank" title="Kusto">Kusto Explorer</a> or
 <a href="https://azportal.kusto.windows.net/AzurePortal?web=1" target="_blank" title="KustoWeb">Kusto Web Explorer</a>.
 
 Our Kusto cluster contains two databases:
@@ -28,7 +28,7 @@ Our Kusto cluster contains two databases:
 There are two tables used for telemetry:
 
 * ClientTelemetry - contains telemetry logged by Framework and Hubs. In this table, you can find all the telemetry events (e.g. BladeLoaded, PartLoaded) which are logged by default for any extension which is registered in the portal.
-* ExtTelemetry - contains extension telemetry. As an extension author, you may log additional telemetry to this table. 
+* ExtTelemetry - contains extension telemetry. As an extension author, you may log additional telemetry to this table.
     * *Note*: Your extension will log to this table only if you have onboarded to the telemetry services provided by Framework.
 
 You can read more [here](portalfx-telemetry-kusto-databases.md) about Kusto and about the data provided in our Kusto cluster.
@@ -86,8 +86,8 @@ To log telemetry, you can call the `trace` method as shown below:
 ```
 
 Telemetry logs go to ExtTelemetry table, which is available in Kusto in both AzurePortal and AzPtlCosmos databases.
-The recommended format for `name` column is 'Extension/Microsoft_Azure_NewExtension/Blade/NewBladeName', if the event is related to a blade. 
-Please do not stringify `data` and `context` columns when passing them through. These columns usually contain JSON values. You should pass their values as objects, as otherwise, this will result in double-encoded strings. 
+The recommended format for `name` column is 'Extension/Microsoft_Azure_NewExtension/Blade/NewBladeName', if the event is related to a blade.
+Please do not stringify `data` and `context` columns when passing them through. These columns usually contain JSON values. You should pass their values as objects, as otherwise, this will result in double-encoded strings.
 
 <a name="portal-telemetry-overview-logging-logging-errors-warnings-to-extevents-table"></a>
 ### Logging errors/warnings to ExtEvents table
@@ -115,13 +115,18 @@ We have built [Extension Errors Dashboard](portalfx-telemetry-extension-errors.m
 
 Following are some of the dashboards that we support. If you do not have access to any of these please contact [ibiza-telemetry@microsoft.com](mailto:ibiza-telemetry@microsoft.com)
 
-|Name                            | PowerBi Link                                                                                                                                     | Metrics Description                                                                    |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-|Portal Performance Dashboard    | [http://aka.ms/portalfx/dashboard/extensionperf](http://aka.ms/portalfx/dashboard/extensionperf)                                         | [Perf Docs](top-extensions-performance.md)                              |
-|Portal Reliability Dashboard    | [http://aka.ms/portalfx/dashboard/extensionperf](http://aka.ms/portalfx/dashboard/extensionperf)                                          | [Reliability Docs](portalfx-reliability.md)                       |
-|Portal Create Dashboard         | [http://aka.ms/portalfx/dashboard/PortalCreate](http://aka.ms/portalfx/dashboard/PortalCreate)                                                   | [Create Docs](portalfx-telemetry-create.md)                       |
-|Extension Errors Dashboard      | [http://aka.ms/portalfx/dashboard/ExtensionErrors](http://aka.ms/portalfx/dashboard/ExtensionErrors)                                             | [Extension Errors Docs](portalfx-telemetry-extension-errors.md)   |
+| Name                            | Power BI Link                                                                                                                                     |
+| ---- | ------------ |
+| Portal Dashboard | [http://aka.ms/portalfx/dashboard](http://aka.ms/portalfx/dashboard) |
+| Portal Performance Dashboard | [https://aka.ms/portalfx/performance/viewer](https://aka.ms/portalfx/performance/viewer) |
 
+
+| Name                            | Metrics Docs                                                                                                                                     |
+| ---- | ------------ |
+| Performance Docs | [top-extensions-performance.md](top-extensions-performance.md) |
+| Reliability Docs | [portalfx-reliability.md](portalfx-reliability.md) |
+| Create Telemetry Docs | [portalfx-telemetry-create.md](portalfx-telemetry-create.md) |
+| How to analyze client errors | [portalfx-telemetry-extension-errors.md](portalfx-telemetry-extension-errors.md) |
 
 <a name="portal-telemetry-overview-collecting-feedback-from-your-users"></a>
 ## Collecting Feedback From Your Users

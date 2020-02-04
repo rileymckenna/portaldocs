@@ -41,7 +41,7 @@ The following is a high-level representation of the sign-in flow provided by the
 
 The recommended practice is to use cross-origin resource sharing (CORS) for all of your non-aggregated, non-orchestrated calls. If you need to call multiple sources for a single piece of UI, you should use a server API to orchestrate/aggregate those calls.
 
-From the extension client to call any server API , use the built-in `ajax()` function to communicate with your extension server. This function will attach a token targeted at ARM specific to your extension to the HTTP header. 
+From the extension client to call any server API , use the built-in `ajax()` function to communicate with your extension server. This function will attach a token targeted at ARM specific to your extension to the HTTP header.
 **Do not use `jQuery.ajax()`** &ndash; it will not properly authorize your requests.
 
 **NOTE:** If you have a scenario that isn't supported by `ajax()`, you can use the `getAuthorizationToken()` function to obtain a token and manually attach it to your own request._
@@ -346,7 +346,7 @@ Due to token size constraints, additional information cannot be added to the tok
 <a name="calling-alternate-resources-faqs-q-how-do-i-get-the-list-of-subscriptions-or-just-those-selected-by-a-user"></a>
 #### Q: How do I get the list of subscriptions? Or just those selected by a user?
 
-A: Call the `MsPortalFx.Azure.getAllSubscriptions()` or `MsPortalFx.Azure.getSelectedSubscriptions()` APIs (see the [subscriptions page](portalfx-subscriptions.md) for more information).
+A: Call the `MsPortalFx.Azure.getSelectedSubscriptions()` APIs (see the [subscriptions page](portalfx-subscriptions.md) for more information).
 
 <a name="calling-alternate-resources-faqs-q-when-do-authenticated-sessions-expire"></a>
 #### Q: When do authenticated sessions expire?

@@ -52,8 +52,8 @@ For all other questions please reach out to [Ibiza Telemetry](mailto:ibiza-telem
 <a name="overview-viewing-telemetry-permissions-programmatic-access"></a>
 #### Programmatic access
 
-Please note that we already offer pretty extensive and customized alerting for extensions that may reduce (often eliminates) the need for you to request programmatic accesses. Please see https://aka.ms/portalfx/docs/alerting for more details. 
-However, if you require programmatic access, we're onboarding partners to our dedicated AzPortalPartner follower cluster. To see the steps to proceed, please review our [onboarding instructions](https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/portalfx-telemetry-getting-started.md#programmatic-access). 
+Please note that we already offer pretty extensive and customized alerting for extensions that may reduce (often eliminates) the need for you to request programmatic accesses. Please see https://aka.ms/portalfx/docs/alerting for more details.
+However, if you require programmatic access, we're onboarding partners to our dedicated AzPortalPartner follower cluster. To see the steps to proceed, please review our [onboarding instructions](https://github.com/Azure/portaldocs/blob/master/portal-sdk/generated/portalfx-telemetry-getting-started.md#programmatic-access).
 
 Kusto.Explorer: [Application](http://kusto-us/ke/Kusto.Explorer.application)
 
@@ -62,12 +62,19 @@ Kusto.Explorer: [Application](http://kusto-us/ke/Kusto.Explorer.application)
 
 Following are some of the dashboards that we support. If you do not have access to any of these please follow our [permissions documentation](#permissions).
 
-| Name | Power BI Link | Metrics Description |
-| ---- | ------------ | ------------------- |
-| Portal Performance Dashboard | [http://aka.ms/portalfx/dashboard/extensionperf](http://aka.ms/portalfx/dashboard/extensionperf) | [Perf Docs](top-extensions-performance.md) |
-| Portal Reliability Dashboard | [http://aka.ms/portalfx/dashboard/extensionperf](http://aka.ms/portalfx/dashboard/extensionperf) | [Reliability Docs](portalfx-reliability.md) |
-| Portal Create Dashboard | [http://aka.ms/portalfx/dashboard/PortalCreate](http://aka.ms/portalfx/dashboard/PortalCreate) | [Create Docs](portalfx-telemetry-create.md) |
-| Extension Errors Dashboard | [http://aka.ms/portalfx/dashboard/ExtensionErrors](http://aka.ms/portalfx/dashboard/ExtensionErrors) | [Extension Errors Docs](portalfx-telemetry-extension-errors.md) |
+
+| Name | Power BI Link |
+| ---- | ------------ |
+| Portal Dashboard | [http://aka.ms/portalfx/dashboard](http://aka.ms/portalfx/dashboard) |
+| Portal Performance Dashboard | [https://aka.ms/portalfx/performance/viewer](https://aka.ms/portalfx/performance/viewer) |
+
+
+| Name |  Metrics Docs |
+| ---- | ------------ |
+| Performance Docs | [top-extensions-performance.md](top-extensions-performance.md) |
+| Reliability Docs | [portalfx-reliability.md](portalfx-reliability.md) |
+| Create Telemetry Docs | [portalfx-telemetry-create.md](portalfx-telemetry-create.md) |
+| How to analyze client errors | [portalfx-telemetry-extension-errors.md](portalfx-telemetry-extension-errors.md) |
 
 <a name="overview-viewing-telemetry-custom-queries"></a>
 ### Custom queries
@@ -424,6 +431,8 @@ Telemetry logs go to ExtTelemetry table, which is available in Kusto in both Azu
 The recommended format for `name` column is 'Extension/Microsoft_Azure_NewExtension/Blade/NewBladeName', if the event is related to a blade.
 Do not stringify the `data` and `context` columns passed to the logs as the trace function does so automatically. Passing stringified versions of these parameters will result in hard to parse double-encoded strings in the back-end logs.
 
+> Every 60 seconds, when an extension's telemetry logs reach above 200 events per user per browser tab, we stop logging ExtTelemetry events utill the next 60 seconds window is started. In addition a telemetry throttled IcM alert is triggered to notify the extension partner.
+
 <a name="overview-logging-telemetry-logging-errors-warnings-to-extevents-table"></a>
 ### Logging errors/warnings to ExtEvents table
 
@@ -451,7 +460,7 @@ We have built [Extension Errors Dashboard](portalfx-telemetry-extension-errors.m
 <a name="overview-logging-telemetry-verifying-live-telemetry-using-console-logs"></a>
 #### Using Console Logs
 
-1. Enable Console Telemetry - [https://portal.azure.com/?feature.consoletelemetry=true](https://portal.azure.com/?feature.consoletelemetry=true) 
+1. Enable Console Telemetry - [https://portal.azure.com/?feature.consoletelemetry=true](https://portal.azure.com/?feature.consoletelemetry=true)
 1. Hit F12 and view the "Console" Tab.
 1. You will be able to see most of all telemetry logs within this window. The only known **Action** that doesn’t show up here is **CreateFlowLaunched**
     ![Fiddler](../media/portalfx-telemetry/consoleLogs.png)

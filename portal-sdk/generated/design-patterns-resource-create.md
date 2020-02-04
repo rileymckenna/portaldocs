@@ -1,6 +1,11 @@
 ﻿# Create a resource
 The "create a resource" pattern provides a simple, intuitive and quick experience for creating resources by requiring a minimum number of fields and providing default values. The pattern also enables users to walk through detailed configuration options in order to set additional configuration options. The experience uses a fullscreen page with tabs to separate configuration steps and guide the user.
 
+<a name="declarative-json-based-creates"></a>
+### Declarative JSON based creates
+
+If you are authoring a new create experience or moving an existing create to our new compliant full screen create, do consider the new declarative JSON based create documented [here](portalfx-cuid.md). This can significantly reduce your dev costs (under 2 hours) while giving you a compliant, full screen create without any future maintenance costs!
+
 <a name="context"></a>
 <a name="context"></a>
 ## Context
@@ -21,7 +26,7 @@ The resource create pattern enables quick configuration of a new resource by req
 ### Also known as
 
 - Full screen create
-- Tabbed create 
+- Tabbed create
 - Create wizard
 - Resource create 
 
@@ -72,7 +77,7 @@ The create a resource experience contains:
 <a name="anatomy-tabs"></a>
 ### Tabs
 
-Tabs separate the creation into logical steps. 
+Tabs separate the creation into logical steps.
 
 Each tab should include a brief description. When possible include **Learn more** links to relevant docs.
 
@@ -90,7 +95,7 @@ Section headers should follow sentence case, with only the first letter capitali
 * Alignment: Label and controls should be on the same line.  The **smartAlignLabels** option for Tab and Section controls will enable this behavior
 * Info Bubbles: If you have input fields that may not be immediately familiar to users, include an info bubble that shows more information.
 * Required values: Fields should indicate whether the input is required
-* Validation: Individual fields should perform vaklidation in real-time to provide immediate feedback regarding user input at the field level. The entire form will validate when the user navigates to the Review + create tab.  This validation will handle any missing required values in addition to server-side validation logic. 
+* Validation: Individual fields should perform vaklidation in real-time to provide immediate feedback regarding user input at the field level. The entire form will validate when the user navigates to the Review + create tab.  This validation will handle any missing required values in addition to server-side validation logic.
 
 <div style="max-width:800px">
 <img alttext="Tabs" src="../media/design-patterns-resource-create/Grouped-input-fields.png" />
@@ -107,7 +112,7 @@ Context panes can be used for sub creates within the create flow. The sub create
 <a name="anatomy-footer-navigation"></a>
 <a name="anatomy-footer-navigation"></a>
 ### Footer navigation
-The footer area contains the call to action (CTA) for creating the resource, as well as two buttons used for navigating between tabs. If your resource supports templates, you will also have a download template link in the footer of the Review + create tab.  
+The footer area contains the call to action (CTA) for creating the resource, as well as two buttons used for navigating between tabs. If your resource supports templates, you will also have a download template link in the footer of the Review + create tab.
 
 The items that are typically in the footer area are
 * Review + create button - on all tabs except the last tab - clicking the review and create button navigates the page to the last tab
@@ -177,9 +182,9 @@ The optional tabs should have the following in the footer area
 <a name="behavior-tabs-tags"></a>
 <a name="behavior-tabs-1-tags"></a>
 #### Tags
-Many enterprises are starting to create subscription and resource group polices that require tagging resources at create time.  Not including the **Tags** tab will block those users from deploying resources using the portal.  The **Tags** tab is always the penultimate tab.  
+Many enterprises are starting to create subscription and resource group polices that require tagging resources at create time.  Not including the **Tags** tab will block those users from deploying resources using the portal.  The **Tags** tab is always the penultimate tab.
 
-* **Tags** - use the TagsByResource control to enable users to assign key value pairs to the selected Resource Types.	
+* **Tags** - use the TagsByResource control to enable users to assign key value pairs to the selected Resource Types.
 
 ![alt-text](../media/top-extensions-create/Tags.png "Tags control")
 
@@ -264,11 +269,11 @@ The post create page provides realtime deployment status, help with troubleshoot
 <a name="research-and-usability"></a>
 ## Research and usability
 
-* Create March 2017: https://hits.microsoft.com/study/6006240 
-* Create – sub-create Jan 2018: https://hits.microsoft.com/study/6005381 
-* Create – sub-create Feb 2018: https://hits.microsoft.com/study/6005427 
-* Create – Tabs + links Sept 2018: https://hits.microsoft.com/study/6005479 
-* Post create March 2018: https://hits.microsoft.com/study/6006070 
+* Create March 2017: https://hits.microsoft.com/study/6006240
+* Create – sub-create Jan 2018: https://hits.microsoft.com/study/6005381
+* Create – sub-create Feb 2018: https://hits.microsoft.com/study/6005427
+* Create – Tabs + links Sept 2018: https://hits.microsoft.com/study/6005479
+* Post create March 2018: https://hits.microsoft.com/study/6006070
 
 
 <a name="telemetry"></a>
@@ -287,12 +292,20 @@ Developers can use the following information to get started implementing this pa
 ## Tips and tricks
 
 -   Set a maximimum width of 700px for the page area that contains input fields
--   To include the visual connector between Subscription and resource group, set `Nested = True` on the resource group control.  
+-   To include the visual connector between Subscription and resource group, set `Nested = True` on the resource group control.
 -   The spacing between the items in the footer is 12px
 
 <a name="for-developers-related-documentation"></a>
 <a name="for-developers-related-documentation"></a>
 ## Related documentation
+
+<a name="for-developers-related-documentation-declarative-json-based-creates-1"></a>
+### Declarative JSON based creates
+
+If you are authoring a new create experience or moving an existing create to our new compliant full screen create, do consider the new declarative JSON based create documented [here](portalfx-cuid.md). This can significantly reduce your dev costs (under 2 hours) while giving you a compliant, full screen create without any future maintenance costs!
+
+<a name="for-developers-related-documentation-native-typescript-create"></a>
+### Native typescript create
 
 -   Create a Resource [top-extensions-create.md](./top-extensions-create.md)
 

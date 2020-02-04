@@ -24,7 +24,7 @@ Name: AzPortalPartner
 
 Name: AzPortalMC
 - Cloud: Mooncake
-- Data Source: https://azportalmc.kusto.chinacloudapi.cn
+- Data Source: https://azportalmc2.chinaeast2.kusto.chinacloudapi.cn
 
 Name: AzPortalBF
 - Cloud: Black Forest

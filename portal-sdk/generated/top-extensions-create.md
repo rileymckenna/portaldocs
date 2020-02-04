@@ -7,7 +7,12 @@
 The create experience is one of the most important customer journeys within the portal. Which is why our designers have spent many months testing and validating different design guidelines. Our most recent design incorporates a full screen blade and uses horizontal tabs to help organize different configuration settings into sections. The goal is to develop a consistent, simple, intuitive, and quick customer experience across resources.
 
 Ask a `create` questions on [Stack Overflow](https://stackoverflow.microsoft.com/questions/tagged/ibiza-create)
-	
+
+<a name="create-declarative-json-based-creates"></a>
+### Declarative JSON based creates
+
+If you are authoring a new create experience or moving an existing create to our new compliant full screen create, do consider the new declarative JSON based create documented [here](portalfx-cuid.md). This can significantly reduce your dev costs (under 2 hours) while giving you a compliant, full screen create without any future maintenance costs!
+
 <a name="create-getting-started"></a>
 ### Getting Started
 
@@ -16,7 +21,7 @@ The  most recent Portal SDK contains a sample create in `SamplesExtension/Client
 <a name="create-related-design-guidelines"></a>
 ### Related design guidelines
 
--   Create a Resource [top-design-patterns-resource-create.md](top-design-patterns-resource-create.md)
+-   Create a Resource [design-patterns-resource-create.md](design-patterns-resource-create.md)
 
 <a name="create-design-principles"></a>
 ### Design Principles
@@ -35,16 +40,16 @@ Here are the top 5 guidelines you should follow when designing your Create form:
 Use the tabs control & sections to organize content. The Basics tab should be the starting point for all creates and where essential configurations should be placed. The design should allow for quick deployments at any time with unrestricted navigation between tabs. Enabling customers to freely navigate reduces the friction for customers looking to learn about your resource which can lead to additional deployments.
 
 ![alt-text](../media/top-extensions-create/Tabs.png "Create experience with Tabs")
-	
+
 <a name="create-tabs"></a>
 ### Tabs
 
 Most creates should have a minimum of 3 tabs; Basics, Tags, Review + create.  All other tabs are optional.
 
 **Basics**:  Should contain most of the required elements needed to deploy a resource successfully.   Set default values when possible to eliminate additional time spent on create.
-	
+
 **Tags**:  Tagging resources during creates is now supported when using the Tags control.  Subscription and Resource Group level policies may require users to tag resources during create.  Not including the Tags control may block users from deploying resources.
-	
+
 **Review + create**:   Allows customers to review configured and defaulted settings before procuring resources.  Use the Summary control to organize and display key/value pairs before create.  Validations are performed before users can successfully submit.  See Validations below for further details.
 
 <a name="create-tab-layout"></a>
@@ -57,9 +62,9 @@ Most creates should have a minimum of 3 tabs; Basics, Tags, Review + create.  Al
 **Section Headers**: Used to separate common settings within a tab.
 
 **Alignment**: Stack labels above controls if the screen resolution < 700px.
-	
+
 **Info Bubbles**: All form controls should include help text.
-	
+
 <a name="create-sub-creates"></a>
 ### Sub Creates
 
@@ -116,12 +121,12 @@ const engineDisplacement = FxDropDown.create<string>(container, {
 <a name="create-tags"></a>
 ### Tags
 
-The Tags control, allows users to assign key value pairs to selected Resource Types.	
+The Tags control, allows users to assign key value pairs to selected Resource Types.
 
 ![alt-text](../media/top-extensions-create/Tags.png "Tags control")
 
 Include the `tagMap` of a resource from the `TagsByResource` control when constructing the parameters required by the ARM template.  Note: `tagMap` must be converted from an array to a `StringMap`.
-	
+
 ```typescript
 
 const parameters = {
@@ -147,7 +152,7 @@ Allowing the user to verify all settings prior to submission ensures accuracy an
 
 <a name="create-setting-up-the-create-button"></a>
 ### Setting up the create button
-	
+
 ```typescript
 
 const onCreateButtonClick = () => {

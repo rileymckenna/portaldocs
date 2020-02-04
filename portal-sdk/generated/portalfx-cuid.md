@@ -57,9 +57,9 @@ Therefore, step 1 of moving to CreateUiDefinition based creates will be update y
 <a name="moving-to-compliant-full-screen-create-using-createuidefinition-steps-to-move-to-full-screen-create-step-2-author-your-createuidefinition-json"></a>
 ### Step 2: Author your CreateUiDefinition json
 
-You can author your CreateUiDefinition json by using the CreateUiDefinition sandbox available [here](https://aka.ms/CreateUiDefinition/sandbox). You can click on the “Demo every element” option to get a sense of the capabilities of CreateUiDefinition. You can reach out to [Shrisha Kumar](mailto:shku@microsoft.com) or [Gary Keong](mailto:garyke@microsoft.com) if you have any questions.
+You can author your CreateUiDefinition json by using the CreateUiDefinition sandbox available [here](https://aka.ms/createuidef/sandbox). You can click on the “Demo every element” option to get a sense of the capabilities of CreateUiDefinition. You can reach out to [Shrisha Kumar](mailto:shku@microsoft.com) or [Gary Keong](mailto:garyke@microsoft.com) if you have any questions.
 
-The [CreateUiDefinition sandbox](https://aka.ms/CreateUiDefinition/sandbox) also links to CreateUiDefinition documentation in the left nav section.
+The [CreateUiDefinition sandbox](https://aka.ms/createuidef/sandbox) also links to CreateUiDefinition documentation in the left nav section.
 
 In this example, we will build a full screen create blade for an asset named IbizaEngine which has an ARM resource type of `Providers.Test/statefulIbizaEngines`. We use the CreateUiDefinition sandbox to author our CreateUiDefinition.json and see it render in real-time by clicking preview.
 

@@ -18,14 +18,6 @@ MsPortalFx.Azure.getSelectedSubscriptions().then((subs: Subscription[]) => {
 });
 ```
 
-To get all subscriptions, call the `getAllSubscriptions()` function:
-
-```ts
-MsPortalFx.Azure.getAllSubscriptions().then((subs: Subscription[]) => {
-    ...
-});
-```
-
 <a name="subscriptions-getting-subscription-details"></a>
 ### Getting subscription details
 Extensions need subscription details to enable the following scenarios:
